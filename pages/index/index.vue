@@ -17,7 +17,6 @@ export default {
   components: { waterfallsFlow },
   data() {
     return {
-      title: "Hello",
       list: [
         {
           id: 1,
