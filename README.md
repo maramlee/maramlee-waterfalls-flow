@@ -57,6 +57,28 @@ export default {
 | ------- | -------------------- | ---- | -------------- |
 | refresh | 刷新数据，数据初始化 | -    | 页面下拉刷新等 |
 
+### refresh 使用示例
+
+使用部分代码样例
+
+```vue
+<template>
+  <waterfallsFlow ref="waterfallsFlow" :list="list">
+    <template v-slot:default="item"> <!-- ... --> </template>
+  </waterfallsFlow>
+</template>
+<script>
+  import waterfallsFlow from "@/components/maramlee-waterfalls-flow/maramlee-waterfalls-flow.vue";
+  export default {
+    components: { waterfallsFlow },
+    onPullDownRefresh() {
+      this.$refs.waterfallsFlow.refresh();
+      // 重新获取渲染列表
+    },
+  };
+</script>
+```
+
 ## 使用样例
 
 pages/index/index.vue

@@ -1,6 +1,6 @@
 <template>
   <view class="content">
-    <waterfallsFlow :list="list">
+    <waterfallsFlow :list="list" :cols="3">
       <template v-slot:default="item">
         <view class="cnt">
           <view class="title">{{item.title}}</view>
