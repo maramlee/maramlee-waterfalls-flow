@@ -11,6 +11,7 @@
     >
       <image
         class="waterfalls-list-image"
+        :class="$slots.default ?'' :'single'"
         mode="widthFix"
         :style="imageStyle"
         :src="item[imageSrcKey]"
@@ -119,6 +120,10 @@ $border-radius: 6px;
       width: 100%;
       will-change: transform;
       border-radius: $border-radius $border-radius 0 0;
+      display: block;
+      &.single {
+        border-radius: $border-radius;
+      }
     }
   }
 }

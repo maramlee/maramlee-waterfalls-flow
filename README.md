@@ -2,15 +2,17 @@
 
 ## 前言
 
-waterfalls-flow 是一个瀑布流插件。
+waterfalls-flow 是一个瀑布流插件，简单易用。
 
 前段时间做项目中需要使用到瀑布流，但找了一圈，都没有找到合适的瀑布流插件，很多都是直接通过标签分列，治标不治本。
 
-所以自己动手写了这个插件，可以配置多列（默认 2 列，最少 2 列，不考虑性能或其他，按理讲最多可以无限多）。适用于 h5 端和 app 端，其他端没测试，可以自行测试，按道理来说是没问题的。
+所以自己动手写了这个插件，可以配置多列（默认 2 列，最少 2 列，除非故意太多列影响渲染，按理讲最多可以无限多）。适用于 h5 端和 app 端，其他端没测试，可以自行测试，按道理来说是没问题的。
+
+利用 vue 的特性避免重复渲染，每次加载数据除非本身 http 请求时间长影响外，每次渲染只有新增的数据渲染，已经渲染的数据不会重复再次渲染影响性能。所以，不会因为数据加载越来越多而渲染越来越慢。
 
 ## 使用方式
 
-在 `script` 中引用组件
+### 在 `script` 中引用组件
 
 ```javascript
 import waterfallsFlow from "@/components/maramlee-waterfalls-flow/maramlee-waterfalls-flow.vue";
@@ -19,7 +21,11 @@ export default {
 };
 ```
 
-在 `template` 中使用组件
+### 在 `template` 中使用组件
+
+#### 有插槽内容的情况要这样用
+
+注意：`item` 包含 `list` 对应的数据项，可以随意搭配、自定义使用。
 
 ```vue
 <template>
@@ -28,6 +34,14 @@ export default {
       <!-- 此处添加插槽内容 -->
     </template>
   </waterfallsFlow>
+</template>
+```
+
+可以只是渲染图片，不需要其他：
+
+```vue
+<template>
+  <waterfallsFlow :list="list" />
 </template>
 ```
 
