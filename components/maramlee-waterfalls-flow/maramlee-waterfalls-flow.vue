@@ -1,17 +1,42 @@
 <template>
   <view class="waterfalls-box" :style="{height:height+'px'}">
+    <!--  #ifdef  MP-WEIXIN -->
     <view
       v-for="(item,index) of list"
       class="waterfalls-list"
+      :key="item[idKey]"
       :id="'waterfalls-list-id-'+item[idKey]"
       :ref="'waterfalls-list-id-'+item[idKey]"
-      :style="{'--offset':offset + 'px','--cols':cols,...listStyle,...(allPositionArr[index] || {})}"
-      :key="item[idKey]"
+      :style="{'--offset':offset + 'px','--cols':cols,top:allPositionArr[index].top||0,left:allPositionArr[index].left||0}"
       @click="$emit('wapper-lick', item)"
     >
       <image
         class="waterfalls-list-image"
-        :class="$slots.default ?'' :'single'"
+        mode="widthFix"
+        :class="$slots.default ? '' :'single'"
+        :style="imageStyle"
+        :src="item[imageSrcKey]"
+        @load="imageLoadHandle(index)"
+        @error="imageLoadHandle(index)"
+        @click="$emit('image-click', item)"
+      />
+      <slot name="slot{{index}}" />
+    </view>
+    <!--  #endif -->
+
+    <!--  #ifndef  MP-WEIXIN -->
+    <view
+      v-for="(item,index) of list"
+      class="waterfalls-list"
+      :key="item[idKey]"
+      :id="'waterfalls-list-id-'+item[idKey]"
+      :ref="'waterfalls-list-id-'+item[idKey]"
+      :style="{'--offset':offset + 'px','--cols':cols,...listStyle,...(allPositionArr[index] || {})}"
+      @click="$emit('wapper-lick', item)"
+    >
+      <image
+        class="waterfalls-list-image"
+        :class="$slots ? '' :'single'"
         mode="widthFix"
         :style="imageStyle"
         :src="item[imageSrcKey]"
@@ -19,8 +44,9 @@
         @error="imageLoadHandle(index)"
         @click="$emit('image-click', item)"
       />
-      <slot v-bind="{...item}" />
+      <slot v-bind="item" />
     </view>
+    <!--  #endif -->
   </view>
 </template>
 <script>
@@ -35,8 +61,11 @@ export default {
     imageSrcKey: { type: String, default: "image_url" },
     // 列数
     cols: { type: Number, default: 2, validator: (num) => num >= 2 },
-    listStyle: { type: Object },
     imageStyle: { type: Object },
+
+    // #ifndef MP-WEIXIN
+    listStyle: { type: Object },
+    // #endif
   },
   data() {
     return {

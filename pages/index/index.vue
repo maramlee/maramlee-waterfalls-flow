@@ -1,12 +1,23 @@
 <template>
   <view class="content">
     <waterfallsFlow :list="list">
+      <!--  #ifdef  MP-WEIXIN -->
+      <view v-for="(item,index) of list" :key="index" slot="slot{{index}}">
+        <view class="cnt">
+          <view class="title">{{item.title}}</view>
+          <view class="text">{{item.text}}</view>
+        </view>
+      </view>
+      <!--  #endif -->
+
+      <!-- #ifndef  MP-WEIXIN -->
       <template v-slot:default="item">
         <view class="cnt">
           <view class="title">{{item.title}}</view>
           <view class="text">{{item.text}}</view>
         </view>
       </template>
+      <!-- #endif -->
     </waterfallsFlow>
   </view>
 </template>
