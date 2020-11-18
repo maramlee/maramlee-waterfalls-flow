@@ -1,21 +1,26 @@
 <template>
-  <view class="waterfalls-box" :style="{height:height+'px'}">
+  <view class="waterfalls-box" :style="{ height: height + 'px' }">
     <!--  #ifdef  MP-WEIXIN -->
     <view
-      v-for="(item,index) of list"
+      v-for="(item, index) of list"
       class="waterfalls-list"
       :key="item[idKey]"
-      :id="'waterfalls-list-id-'+item[idKey]"
-      :ref="'waterfalls-list-id-'+item[idKey]"
-      :style="{'--offset':offset + 'px','--cols':cols,top:allPositionArr[index].top||0,left:allPositionArr[index].left||0}"
+      :id="'waterfalls-list-id-' + item[idKey]"
+      :ref="'waterfalls-list-id-' + item[idKey]"
+      :style="{
+        '--offset': offset + 'px',
+        '--cols': cols,
+        top: allPositionArr[index].top || 0,
+        left: allPositionArr[index].left || 0,
+      }"
       @click="$emit('wapper-lick', item)"
     >
       <image
         class="waterfalls-list-image"
         mode="widthFix"
-        :class="$slots.default ? '' :'single'"
+        :class="{ single }"
         :style="imageStyle"
-        :src="item[imageSrcKey]"
+        :src="item[imageSrcKey] || ' '"
         @load="imageLoadHandle(index)"
         @error="imageLoadHandle(index)"
         @click="$emit('image-click', item)"
@@ -26,20 +31,25 @@
 
     <!--  #ifndef  MP-WEIXIN -->
     <view
-      v-for="(item,index) of list"
+      v-for="(item, index) of list"
       class="waterfalls-list"
       :key="item[idKey]"
-      :id="'waterfalls-list-id-'+item[idKey]"
-      :ref="'waterfalls-list-id-'+item[idKey]"
-      :style="{'--offset':offset + 'px','--cols':cols,...listStyle,...(allPositionArr[index] || {})}"
+      :id="'waterfalls-list-id-' + item[idKey]"
+      :ref="'waterfalls-list-id-' + item[idKey]"
+      :style="{
+        '--offset': offset + 'px',
+        '--cols': cols,
+        ...listStyle,
+        ...(allPositionArr[index] || {}),
+      }"
       @click="$emit('wapper-lick', item)"
     >
       <image
         class="waterfalls-list-image"
-        :class="$slots ? '' :'single'"
+        :class="{ single }"
         mode="widthFix"
         :style="imageStyle"
-        :src="item[imageSrcKey]"
+        :src="item[imageSrcKey] || ' '"
         @load="imageLoadHandle(index)"
         @error="imageLoadHandle(index)"
         @click="$emit('image-click', item)"
@@ -62,6 +72,9 @@ export default {
     // 列数
     cols: { type: Number, default: 2, validator: (num) => num >= 2 },
     imageStyle: { type: Object },
+
+    // 是否是单独的渲染图片的样子，只控制图片圆角而已
+    single: { type: Boolean, default: false },
 
     // #ifndef MP-WEIXIN
     listStyle: { type: Object },
