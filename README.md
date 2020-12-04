@@ -14,6 +14,8 @@ waterfalls-flow 是一个瀑布流插件，简单易用。
 
 我自己的项目是用 ts 写的，不知道有没有需要 ts 版本的，我觉得可能用 ts 占少数，如果需要的话，也可以联系我。
 
+如果需要 nav 切换的样式，请移步 [maramlee-waterfalls-flow-nav](https://ext.dcloud.net.cn/plugin?id=3596) 获取插件。
+
 ## 使用方式
 
 ### 在 `script` 中引用组件
