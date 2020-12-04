@@ -2,6 +2,8 @@
 
 ## 前言
 
+**注意：期待已久的 maramlee-waterfalls-flow-nav 插件更新啦，如果需要 nav 切换的样式，请移步 [maramlee-waterfalls-flow-nav](https://ext.dcloud.net.cn/plugin?id=3596) 获取插件。**
+
 waterfalls-flow 是一个瀑布流插件，简单易用。
 
 前段时间做项目中需要使用到瀑布流，但找了一圈，都没有找到合适的瀑布流插件，很多都是直接通过标签分列，治标不治本。
@@ -13,8 +15,6 @@ waterfalls-flow 是一个瀑布流插件，简单易用。
 利用 vue 的特性避免重复渲染，每次加载数据除非本身 http 请求时间长影响外，每次渲染只有新增的数据渲染，已经渲染的数据不会重复再次渲染影响性能。所以，不会因为数据加载越来越多而渲染越来越慢。
 
 我自己的项目是用 ts 写的，不知道有没有需要 ts 版本的，我觉得可能用 ts 占少数，如果需要的话，也可以联系我。
-
-如果需要 nav 切换的样式，请移步 [maramlee-waterfalls-flow-nav](https://ext.dcloud.net.cn/plugin?id=3596) 获取插件。
 
 ## 使用方式
 
