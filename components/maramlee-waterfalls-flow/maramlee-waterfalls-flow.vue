@@ -139,6 +139,7 @@ export default {
       this.topArr = arr;
       this.num = 0;
       this.oldNum = 0;
+      this.height = 0;
     },
   },
 };
